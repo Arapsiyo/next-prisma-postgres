@@ -2,9 +2,10 @@ import { prisma } from '@/lib/prisma';
 import { NextApiRequest } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const GET = async (req: NextApiRequest, { params }) => {
-  //return new Response('hello');
-
+export const GET = async (
+  req: NextApiRequest,
+  { params }: { params: { id: string } }
+) => {
   const { id } = params;
   try {
     const user = await prisma.user.findFirst({

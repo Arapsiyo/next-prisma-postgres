@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma';
 import React from 'react';
 import { notFound } from 'next/navigation';
 
-const getData = async (id) => {
+const getData = async (id: string) => {
   const res = await fetch(`http://localhost:3000/api/user/${id}`, {
     method: 'GET',
     cache: 'no-store',
@@ -14,7 +14,7 @@ const getData = async (id) => {
   return res.json();
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: { id: string } }) {
   const user = await getData(params.id);
 
   return {
@@ -25,9 +25,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const DetailPage = async ({ params }) => {
+const DetailPage = async ({ params }: { params: { id: string } }) => {
   const user = await getData(params.id);
-  console.log('user: ', user);
 
   return (
     <div>
