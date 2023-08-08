@@ -1,4 +1,6 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const Page: React.FC = () => {
@@ -7,6 +9,8 @@ const Page: React.FC = () => {
     password: '',
     name: '',
   });
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -21,6 +25,7 @@ const Page: React.FC = () => {
         password: '',
         name: '',
       });
+      router.push('/user');
     } catch (err) {
       console.error(err);
     }

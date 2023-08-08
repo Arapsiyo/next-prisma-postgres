@@ -1,5 +1,5 @@
 'use client';
-import { notFound } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 type userType = {
@@ -10,6 +10,7 @@ type userType = {
 };
 
 const Update = ({ params }: { params: { id: string } }) => {
+  const router = useRouter();
   const { id } = params;
   const [user, setUser] = useState<userType>({
     id: '',
@@ -20,12 +21,12 @@ const Update = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+        const res = await fetch(`/api/user/${id}`, {
           method: 'GET',
           cache: 'no-store',
         });
         const data = await res.json();
-        console.log('data ', data);
+
         setUser({
           id: data.id,
           email: data.email,
@@ -51,14 +52,12 @@ const Update = ({ params }: { params: { id: string } }) => {
     e.preventDefault();
 
     try {
-      const result = await fetch(
-        `http://localhost:3000/api/user/update/${id}`,
-        {
-          method: 'PUT',
-          cache: 'no-store',
-          body: JSON.stringify({ user }),
-        }
-      );
+      const result = await fetch(`/api/user/update/${id}`, {
+        method: 'PUT',
+        cache: 'no-store',
+        body: JSON.stringify({ user }),
+      });
+      router.push(`/user`);
     } catch (error) {
       console.log(error);
     }
