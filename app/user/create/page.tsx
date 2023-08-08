@@ -1,14 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-// interface User {
-//   email: String;
-//   password: String;
-//   name: String;
-// }
-
 const Page: React.FC = () => {
-  //const [, setEmail] = useState('');
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -18,9 +11,6 @@ const Page: React.FC = () => {
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      // const body = email;
-      // console.log(typeof body);
-
       await fetch(`/api/user/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
