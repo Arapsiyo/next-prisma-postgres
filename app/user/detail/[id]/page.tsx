@@ -3,7 +3,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 
 const getData = async (id: string) => {
-  const res = await fetch(`/api/user/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/user/${id}`, {
     method: 'GET',
     cache: 'no-store',
   });

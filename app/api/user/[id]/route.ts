@@ -22,11 +22,12 @@ export const DELETE = async (
   { params }: { params: { id: string } }
 ) => {
   const { id } = params;
+  console.log('inside DELETE: ', id);
   try {
     const user = await prisma.user.delete({
       where: { id: Number(id) },
     });
-    return new NextResponse(JSON.stringify(user));
+    return new NextResponse(JSON.stringify('user has been deleted'));
   } catch (err) {
     return new NextRequest(`Error: ${err}`);
   }
